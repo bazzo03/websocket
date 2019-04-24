@@ -17,9 +17,29 @@ public class MyWebSocketActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return receiveBuilder()
-                .match(String.class, message ->
-                        out.tell("I received your message: " + message, self())
+                .match(String.class, message -> {
+                    System.out.println(message);
+                    out.tell("I received your message: " + message, self());
+                    while (true) {
+                        System.out.println("in loop");
+                        sender().tell("received", self());
+                    }
+
+                        }
+
                 )
                 .build();
     }
+
+ /*   @Override
+    public Receive receive() {
+        return receiveBuilder().match(String.class, message ->
+                {
+                    while (true) {
+                        out ! message;
+                        //out.tell("Im sending this string", self());
+                    }
+                }
+                ).build();
+    }*/
 }

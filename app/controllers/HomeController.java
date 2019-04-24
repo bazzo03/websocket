@@ -20,7 +20,8 @@ public class HomeController extends Controller {
     }
 
     public WebSocket socket() {
-        return WebSocket.Json.accept(
+        System.out.println("\n\nMessage Received\n\n");
+        return WebSocket.Text.accept(
                 request -> ActorFlow.actorRef(MyWebSocketActor::props, actorSystem, materializer));
     }
 }
