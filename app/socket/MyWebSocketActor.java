@@ -21,8 +21,9 @@ public class MyWebSocketActor extends AbstractActor {
                     System.out.println(message);
                     out.tell("I received your message: " + message, self());
                     while (true) {
+                        Thread.sleep(5000);
                         System.out.println("in loop");
-                        sender().tell("received", self());
+                        out.tell("received", self());
                     }
 
                         }
